@@ -57,6 +57,8 @@ func checkError(resp *http.Response, body []byte) error {
 // environment variable OLLAMA_HOST, which points to the network host and
 // port on which the ollama service is listening. The format of this variable
 // is:
+// ClientFromEnvironment创建一个新的[Client]，使用来自环境变量OLLAMA_HOST的配置，指向network host和端口
+// 其上是ollama service在监听
 //
 //	<scheme>://<host>:<port>
 //

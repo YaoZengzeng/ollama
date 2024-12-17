@@ -39,21 +39,27 @@ type ImageData []byte
 // GenerateRequest describes a request sent by [Client.Generate]. While you
 // have to specify the Model and Prompt fields, all the other fields have
 // reasonable defaults for basic uses.
+// GenerateRequest描述一个由[Client.Generate]发送的请求，需要指定Model和Prompt字段
+// 所有其他字段必须已经有合理的值用于基础的使用
 type GenerateRequest struct {
 	// Model is the model name; it should be a name familiar to Ollama from
 	// the library at https://ollama.com/library
 	Model string `json:"model"`
 
 	// Prompt is the textual prompt to send to the model.
+	// 发送给model的prompt
 	Prompt string `json:"prompt"`
 
 	// Suffix is the text that comes after the inserted text.
+	// 在插入的text之后的后缀
 	Suffix string `json:"suffix"`
 
 	// System overrides the model's default system message/prompt.
+	// System覆盖model默认的系统message/prompt
 	System string `json:"system"`
 
 	// Template overrides the model's default prompt template.
+	// Template覆盖model默认的prompt template
 	Template string `json:"template"`
 
 	// Context is the context parameter returned from a previous call to
@@ -61,12 +67,14 @@ type GenerateRequest struct {
 	Context []int `json:"context,omitempty"`
 
 	// Stream specifies whether the response is streaming; it is true by default.
+	// Stream指定是否reponse是streaming，默认为true
 	Stream *bool `json:"stream,omitempty"`
 
 	// Raw set to true means that no formatting will be applied to the prompt.
 	Raw bool `json:"raw,omitempty"`
 
 	// Format specifies the format to return a response in.
+	// 制定返回的response的格式
 	Format string `json:"format"`
 
 	// KeepAlive controls how long the model will stay loaded in memory following
@@ -88,16 +96,20 @@ type ChatRequest struct {
 	Model string `json:"model"`
 
 	// Messages is the messages of the chat - can be used to keep a chat memory.
+	// Messages的chat的messages - 可以别用于保持一个chat memory
 	Messages []Message `json:"messages"`
 
 	// Stream enable streaming of returned response; true by default.
+	// Stream使能返回的repsonse的streaming，默认为true
 	Stream *bool `json:"stream,omitempty"`
 
 	// Format is the format to return the response in (e.g. "json").
+	// Format是reponse的格式，例如json
 	Format string `json:"format"`
 
 	// KeepAlive controls how long the model will stay loaded into memory
 	// followin the request.
+	// KeepAlive控制modle会在内存中持续多长时间，在请求之后
 	KeepAlive *Duration `json:"keep_alive,omitempty"`
 
 	// Tools is an optional list of tools the model has access to.
@@ -429,6 +441,7 @@ type TokenResponse struct {
 }
 
 // GenerateResponse is the response passed into [GenerateResponseFunc].
+// GenerateResponse是传入到[GenerateResponseFunc]的response
 type GenerateResponse struct {
 	// Model is the model name that generated the response.
 	Model string `json:"model"`
@@ -437,9 +450,11 @@ type GenerateResponse struct {
 	CreatedAt time.Time `json:"created_at"`
 
 	// Response is the textual response itself.
+	// Response是textual reponse自身
 	Response string `json:"response"`
 
 	// Done specifies if the response is complete.
+	// Done制定response是否完成
 	Done bool `json:"done"`
 
 	// DoneReason is the reason the model stopped generating text.
