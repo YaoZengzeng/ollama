@@ -79,7 +79,9 @@ func modelOptions(model *Model, requestOpts map[string]interface{}) (api.Options
 }
 
 // scheduleRunner schedules a runner after validating inputs such as capabilities and model options.
+// scheduleRunner调度一个runner，在校验inputs之后，例如capabilities和model options
 // It returns the allocated runner, model instance, and consolidated options if successful and error otherwise.
+// 它返回一个allocated runner, model instance以及consolidated options，如果成功的话，否则返回error
 func (s *Server) scheduleRunner(ctx context.Context, name string, caps []Capability, requestOpts map[string]any, keepAlive *api.Duration) (llm.LlamaServer, *Model, *api.Options, error) {
 	if name == "" {
 		return nil, nil, nil, fmt.Errorf("model %w", errRequired)
@@ -1269,7 +1271,9 @@ func Serve(ln net.Listener) error {
 	s.sched.Run(schedCtx)
 
 	// At startup we retrieve GPU information so we can get log messages before loading a model
+	// 在开始的时候，我们获取GPU信息，这样我们可以获取log messages，在加载一个model之前
 	// This will log warnings to the log in case we have problems with detected GPUs
+	// 这会log warnings到日志，万一我们在检测GPUs的时候遇到问题
 	gpus := discover.GetGPUInfo()
 	gpus.LogDetails()
 
